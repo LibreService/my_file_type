@@ -1,0 +1,5 @@
+.my-column {
+  width: calc(100vw - 24px);
+  max-width: 900px;
+  margin: auto;
+}

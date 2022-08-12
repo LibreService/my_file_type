@@ -1,0 +1,42 @@
+{
+  "name": "my-file-type",
+  "version": "0.1.0",
+  "homepage": "https://github.com/LibreService/my_file_type",
+  "author": {
+    "name": "Qijia Liu",
+    "email": "liumeo@pku.edu.cn",
+    "url": "https://github.com/eagleoflqj"
+  },
+  "license": "AGPL-3.0-or-later",
+  "scripts": {
+    "dev": "vite",
+    "db": "bash scripts/build_db.sh",
+    "lib": "bash scripts/build_lib.sh",
+    "wasm": "bash scripts/build_wasm.sh",
+    "lint": "eslint --ext .ts,.js,.vue --fix src",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@rollup/plugin-replace": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.33.0",
+    "@typescript-eslint/parser": "^5.33.0",
+    "@vicons/fa": "^0.12.0",
+    "@vicons/fluent": "^0.12.0",
+    "@vicons/material": "^0.12.0",
+    "@vicons/tabler": "^0.12.0",
+    "@vitejs/plugin-vue": "^3.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "naive-ui": "^2.32.1",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.0",
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.3",
+    "vue-tsc": "^0.38.4"
+  }
+}

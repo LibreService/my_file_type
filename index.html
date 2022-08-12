@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My File Type - LibreService</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="/magic.js"></script>
+    <script>
+      let Files = []
+      const Magic = {}
+      Magic.readyPromise = new Promise(resolve => {
+        Module['onRuntimeInitialized'] = () => {
+          Module.cwrap('init', 'null', [])()
+          Magic.getType = Module.cwrap('get_type', 'string', ['array', 'number'])
+          Magic.getMIME = Module.cwrap('get_mime', 'string', ['array', 'number'])
+          Magic.getExtension = Module.cwrap('get_extension', 'string', ['array', 'number'])
+          resolve()
+        }
+      })
+    </script>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
