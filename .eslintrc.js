@@ -17,5 +17,6 @@ module.exports = {
     '@typescript-eslint'
   ],
   rules: {
+    "vue/valid-v-for": 0
   }
 }

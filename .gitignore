@@ -31,3 +31,5 @@ pnpm-lock.yaml
 *.h
 public/magic.js
 public/magic.data
+
+.vercel

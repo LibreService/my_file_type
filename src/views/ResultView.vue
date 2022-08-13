@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts">
 import { h, ref, onMounted } from 'vue'
 import { NDataTable, NIcon, NInput, useDialog } from 'naive-ui'
 import type { DataTableColumns, UploadFileInfo } from 'naive-ui'
@@ -10,6 +10,7 @@ declare const Magic: {
   getMIME: (buf: Uint8Array, len: number) => string,
   getExtension: (buf: Uint8Array, len: number) => string
 }
+
 type Row = {
   name: string,
   type: string,
@@ -17,8 +18,11 @@ type Row = {
   extension: string,
   file: File
 }
-const headerLength = 1024 * 1024
 
+const headerLength = 1024 * 1024
+</script>
+
+<script setup lang="ts">
 const data = ref<Row[]>([])
 
 const dialog = useDialog()
@@ -74,14 +78,14 @@ function createColumns (): DataTableColumns<Row> {
 
 onMounted(async () => {
   for (const fileInfo of Files) {
-    const arrayBuffer = await fileInfo.file.slice(0, headerLength).arrayBuffer()
+    const arrayBuffer = await fileInfo.file!.slice(0, headerLength).arrayBuffer()
     const u8Array = new Uint8Array(arrayBuffer)
     data.value.push({
       name: fileInfo.name,
       type: Magic.getType(u8Array, u8Array.length),
       mime: Magic.getMIME(u8Array, u8Array.length),
       extension: Magic.getExtension(u8Array, u8Array.length),
-      file: fileInfo.file
+      file: fileInfo.file!
     })
   }
 })

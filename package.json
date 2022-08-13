@@ -9,13 +9,14 @@
   },
   "license": "AGPL-3.0-or-later",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "db": "bash scripts/build_db.sh",
     "lib": "bash scripts/build_lib.sh",
     "wasm": "bash scripts/build_wasm.sh",
-    "lint": "eslint --ext .ts,.js,.vue --fix src",
+    "lint": "eslint --ext .ts,.js,.vue src",
+    "lint:fix": "eslint --ext .ts,.js,.vue --fix src",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --host"
   },
   "devDependencies": {
     "@rollup/plugin-replace": "^4.0.0",

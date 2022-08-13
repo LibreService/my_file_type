@@ -1,15 +1,17 @@
-<script setup lang="ts">
+<script lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { NCard, NButton, NUpload, NUploadDragger, NIcon, NText, NP, NSpace } from 'naive-ui'
-import type { UploadFileInfo } from 'naive-ui'
 import { AttachFileFilled } from '@vicons/material'
+import type { UploadFileInfo } from 'naive-ui'
 
 declare const Magic: { readyPromise: Promise<any> }
 /* eslint-disable no-unused-vars */
 declare let Files: UploadFileInfo[]
 /* eslint-enable no-unused-vars */
+</script>
 
+<script setup lang="ts">
 const router = useRouter()
 const wasmLoaded = ref(false)
 const files = ref<UploadFileInfo[]>([])

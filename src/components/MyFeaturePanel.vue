@@ -10,8 +10,8 @@ const features = [
   { icon: MoneyOffRound, title: 'Free of Charge', description: 'Forget about "try a little for free and pay if you need more".' },
   { icon: FastForwardRound, title: 'Fast', description: 'Thanks to Web Assembly, the speed is comparable to native program.' },
   { icon: UserCheck, title: 'User Friendly', description: 'If you know about file command, you should use that. But if not, this tool is easy to use.' },
-  { icon: BrandOpenSource, title: 'Open Source', description: 'Every SaaS project under LibreService is Free and Open Source. PRs are welcomed!'},
-  { icon: SecurityRound, title: 'Secure', description: 'Your privacy matters! Files won\'t be uploaded. Have doubt? Check Network requests and/or source code.'},
+  { icon: BrandOpenSource, title: 'Open Source', description: 'Every SaaS project under LibreService is Free and Open Source. PRs are welcomed!' },
+  { icon: SecurityRound, title: 'Secure', description: 'Your privacy matters! Files won\'t be uploaded. Have doubt? Check Network requests and/or source code.' },
   { icon: EyeTrackingOff16Filled, title: 'No Telemetry', description: 'Don\'t like trackers? Neither do us. Instead, we welcome you to submit an issue if you have problem.' }
 ]
 </script>
