@@ -39,7 +39,9 @@ function createColumns (): DataTableColumns<Row> {
       render (row) {
         const name = ref(row.name)
         function download () {
-          const url = URL.createObjectURL(row.file)
+          // Disable iOS Safari auto appending extension
+          const newFile = row.file.slice(0, row.file.size, 'application/octet-stream')
+          const url = URL.createObjectURL(newFile)
           const a = document.createElement('a')
           a.href = url
           a.download = name.value
