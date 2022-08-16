@@ -1,15 +1,8 @@
-<script lang="ts">
+<script setup lang="ts">
 import { h, ref, onMounted } from 'vue'
 import { NDataTable, NIcon, NInput, useDialog } from 'naive-ui'
-import type { DataTableColumns, UploadFileInfo } from 'naive-ui'
+import type { DataTableColumns } from 'naive-ui'
 import { DownloadFilled } from '@vicons/material'
-
-declare let Files: UploadFileInfo[]
-declare const Magic: {
-  getType: (buf: Uint8Array, len: number) => string,
-  getMIME: (buf: Uint8Array, len: number) => string,
-  getExtension: (buf: Uint8Array, len: number) => string
-}
 
 type Row = {
   name: string,
@@ -20,9 +13,7 @@ type Row = {
 }
 
 const headerLength = 1024 * 1024
-</script>
 
-<script setup lang="ts">
 const data = ref<Row[]>([])
 
 const dialog = useDialog()
