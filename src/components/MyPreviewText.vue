@@ -6,6 +6,8 @@ import bash from 'highlight.js/lib/languages/bash'
 import c from 'highlight.js/lib/languages/c'
 import clojure from 'highlight.js/lib/languages/clojure'
 import cmake from 'highlight.js/lib/languages/cmake'
+// @ts-ignore
+import cobol from 'highlightjs-cobol'
 import coffeescript from 'highlight.js/lib/languages/coffeescript'
 import cpp from 'highlight.js/lib/languages/cpp'
 import csharp from 'highlight.js/lib/languages/csharp'
@@ -52,12 +54,14 @@ import vbscript from 'highlight.js/lib/languages/vbscript'
 import xml from 'highlight.js/lib/languages/xml'
 import yaml from 'highlight.js/lib/languages/yaml'
 import x86asm from 'highlight.js/lib/languages/x86asm'
+import { langMap } from '../lang'
 
 const hljsLang = {
   bash,
   c,
   clojure,
   cmake,
+  cobol,
   coffeescript,
   cpp,
   csharp,
@@ -106,80 +110,20 @@ const hljsLang = {
   x86asm
 }
 
-const guessLang2Hljs: {
-  [key: string]: string
-} = {
-  'Plain Text': 'plaintext',
-  Assembly: 'x86asm',
-  Batchfile: 'dos',
-  C: 'c',
-  'C#': 'csharp',
-  'C++': 'cpp',
-  Clojure: 'clojure',
-  CMake: 'cmake',
-  // COBOL
-  CoffeeScript: 'coffeescript',
-  CSS: 'css',
-  // CSV
-  Dart: 'dart',
-  // DM
-  Dockerfile: 'dockerfile',
-  Elixir: 'elixir',
-  Erlang: 'erlang',
-  Fortran: 'fortran',
-  Go: 'go',
-  Groovy: 'groovy',
-  Haskell: 'haskell',
-  HTML: 'xml',
-  INI: 'ini',
-  Java: 'java',
-  JavaScript: 'javascript',
-  JSON: 'json',
-  Julia: 'julia',
-  Kotlin: 'kotlin',
-  Lisp: 'lisp',
-  Lua: 'lua',
-  Makefile: 'makefile',
-  Markdown: 'markdown',
-  Matlab: 'matlab',
-  'Objective-C': 'objectivec',
-  OCaml: 'ocaml',
-  Pascal: 'delphi',
-  Perl: 'perl',
-  PHP: 'php',
-  PowerShell: 'powershell',
-  Prolog: 'prolog',
-  Python: 'python',
-  R: 'r',
-  Ruby: 'ruby',
-  Rust: 'rust',
-  Scala: 'scala',
-  Shell: 'bash',
-  SQL: 'sql',
-  Swift: 'swift',
-  TeX: 'latex',
-  TOML: 'ini',
-  TypeScript: 'typescript',
-  Verilog: 'verilog',
-  'Visual Basic': 'vbscript',
-  XML: 'xml',
-  YAML: 'yaml'
-}
-
 for (const [key, value] of Object.entries(hljsLang)) {
   hljs.registerLanguage(key, value)
 }
 
-const options = Object.keys(guessLang2Hljs).map(key => ({ label: key, value: key }))
+const options = Object.entries(langMap).map(([ext, { name }]) => ({ label: name, value: ext }))
 </script>
 
 <script setup lang="ts">
 const props = defineProps<{
   code: string
-  predictedLanguage: string
+  predictedExtension: string
 }>()
 
-const language = ref(props.predictedLanguage)
+const extension = ref(props.predictedExtension)
 
 function fallback () {
   return options[0]
@@ -191,10 +135,11 @@ function fallback () {
   <n-card>
     <div style="display: flex; align-items: center; justify-content: flex-end">
       Language:
-      <n-select v-model:value="language" :options="options" :fallback-option="fallback" style="width: 160px; margin-left: 8px"/>
+      <n-select v-model:value="extension" :options="options" :fallback-option="fallback" style="width: 160px; margin-left: 8px"/>
     </div>
     <n-scrollbar x-scrollable>
-      <n-code :code="code" :language="guessLang2Hljs[language]" show-line-numbers style="margin-top: 8px"/>
+      <!-- font-family needed as on Ubuntu Firefox Courier is selected and TeX Gyre Cursor is used, but "fi" is wrongly rendered -->
+      <n-code :code="code" :language="langMap[extension]?.hljs || 'plaintext'" show-line-numbers style="margin-top: 8px; font-family: monospace"/>
     </n-scrollbar>
   </n-card>
 </n-config-provider>

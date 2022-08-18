@@ -1,6 +1,6 @@
 {
   "name": "my-file-type",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/LibreService/my_file_type",
   "author": {
     "name": "Qijia Liu",
@@ -27,6 +27,7 @@
     "@vicons/material": "^0.12.0",
     "@vicons/tabler": "^0.12.0",
     "@vitejs/plugin-vue": "^3.0.3",
+    "@vscode/vscode-languagedetection": "^1.0.21",
     "eslint": "^8.22.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
@@ -34,9 +35,11 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-vue": "^9.3.0",
     "highlight.js": "^11.6.0",
+    "highlightjs-cobol": "^0.3.1",
     "naive-ui": "^2.32.1",
     "typescript": "^4.7.4",
     "vite": "^3.0.8",
+    "vite-plugin-static-copy": "^0.7.0",
     "vue": "^3.2.37",
     "vue-router": "^4.1.3",
     "vue-tsc": "^0.40.1"
