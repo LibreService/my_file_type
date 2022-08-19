@@ -6,7 +6,6 @@ import bash from 'highlight.js/lib/languages/bash'
 import c from 'highlight.js/lib/languages/c'
 import clojure from 'highlight.js/lib/languages/clojure'
 import cmake from 'highlight.js/lib/languages/cmake'
-// @ts-ignore
 import cobol from 'highlightjs-cobol'
 import coffeescript from 'highlight.js/lib/languages/coffeescript'
 import cpp from 'highlight.js/lib/languages/cpp'
