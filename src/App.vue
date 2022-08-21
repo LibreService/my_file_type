@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router'
 import { NDialogProvider, NConfigProvider, NLayout, NLayoutHeader, NLayoutContent, NLayoutFooter, NH1, darkTheme, useOsTheme } from 'naive-ui'
 import MyHeader from './components/MyHeader.vue'
 import MyFooter from './components/MyFooter.vue'
+import MyPwa from './components/MyPwa.vue'
 import './main.css'
 
 const osThemeRef = useOsTheme()
@@ -14,6 +15,7 @@ function gotoMainView () {
 </script>
 
 <template>
+<my-pwa />
 <n-config-provider :theme="osThemeRef === 'dark' ? darkTheme : null">
 <n-dialog-provider>
 <n-layout-header bordered style="height: 56px; display: flex; align-items: center; justify-content: space-between">
