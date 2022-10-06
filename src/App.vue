@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { NDialogProvider, NConfigProvider, NH1, darkTheme, useOsTheme } from 'naive-ui'
-import { MyLayout } from '@libreservice/my-widget'
-import MyHeader from './components/MyHeader.vue'
+import { MyLayout, MyHeader } from '@libreservice/my-widget'
 import MyFooter from './components/MyFooter.vue'
 import MyPwa from './components/MyPwa.vue'
+import { homepage } from '../package.json'
 import './main.css'
 
 const osThemeRef = useOsTheme()
@@ -21,7 +21,7 @@ function gotoMainView () {
 <n-dialog-provider>
 <my-layout>
   <template #header>
-    <my-header />
+    <my-header icon="/LibreService.svg" :homepage="homepage" />
   </template>
   <template #content>
     <div style="cursor: pointer; text-align: center; margin-top: 16px" @click="gotoMainView">
