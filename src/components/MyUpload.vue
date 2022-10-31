@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { NCard, NButton, NUpload, NUploadDragger, NIcon, NText, NP, NSpace } from 'naive-ui'
 import { AttachFileFilled } from '@vicons/material'
 import type { UploadFileInfo } from 'naive-ui'
 
 const router = useRouter()
-const wasmLoaded = ref(false)
 const files = ref<UploadFileInfo[]>([])
 
 function handleUpdate (fileList: UploadFileInfo[]) {
@@ -22,12 +21,7 @@ function check () {
   router.push({ name: 'Result' })
 }
 
-const checkable = computed(() => wasmLoaded.value && files.value.length > 0)
-
-onMounted(async () => {
-  await Magic.readyPromise
-  wasmLoaded.value = true
-})
+const checkable = computed(() => files.value.length > 0)
 </script>
 
 <template>

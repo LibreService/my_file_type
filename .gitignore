@@ -32,4 +32,6 @@ pnpm-lock.yaml
 public/magic.js
 public/magic.data
 
+*.js.map
+public/worker.js
 .vercel

@@ -8,6 +8,7 @@ import { Eye } from '@vicons/fa'
 import { DownloadFilled } from '@vicons/material'
 import MyPreviewText from '../components/MyPreviewText.vue'
 import { langMap } from '../lang'
+import { getType, getMIME, getExtension } from '../workerAPI'
 
 type Row = {
   name: string,
@@ -109,11 +110,10 @@ function createColumns (): DataTableColumns<Row> {
 onMounted(async () => {
   for (const fileInfo of Files) {
     const arrayBuffer = await fileInfo.file!.slice(0, headerLength).arrayBuffer()
-    const u8Array = new Uint8Array(arrayBuffer)
     let guessLangExtension: string | undefined
     let type: string
     let extension: string
-    let mime = Magic.getMIME(u8Array, u8Array.length)
+    let mime = await getMIME(arrayBuffer)
     const isText = mime.endsWith('ascii') || mime.endsWith('utf-8')
     if (isText) {
       const { languageId, confidence } = (await detector.runModel(await fileInfo.file!.text()))[0]
@@ -127,8 +127,8 @@ onMounted(async () => {
       mime = mime.replace(/.*;/, (lang.mime || 'text/plain') + ';')
       extension = guessLangExtension
     } else {
-      type = Magic.getType(u8Array, u8Array.length)
-      extension = Magic.getExtension(u8Array, u8Array.length)
+      type = await getType(arrayBuffer)
+      extension = await getExtension(arrayBuffer)
     }
     data.value.push({
       name: fileInfo.name,
