@@ -1,9 +1,9 @@
-import { LambdaWorker } from '@libreservice/my-worker'
+import { LambdaWorker, RentedBuffer } from '@libreservice/my-worker'
 
 const worker = new LambdaWorker('/worker.js')
 
-const getType: (arrayBuffer: ArrayBuffer) => Promise<string> = worker.register('getType')
-const getMIME: (arrayBuffer: ArrayBuffer) => Promise<string> = worker.register('getMIME')
-const getExtension: (arrayBuffer: ArrayBuffer) => Promise<string> = worker.register('getExtension')
+const getType: (arrayBuffer: RentedBuffer) => Promise<string> = worker.register('getType')
+const getMIME: (arrayBuffer: RentedBuffer) => Promise<string> = worker.register('getMIME')
+const getExtension: (arrayBuffer: RentedBuffer) => Promise<string> = worker.register('getExtension')
 
 export { getType, getMIME, getExtension }
