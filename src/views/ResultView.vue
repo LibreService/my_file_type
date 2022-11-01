@@ -116,9 +116,12 @@ onMounted(async () => {
     let mime = await getMIME(arrayBuffer)
     const isText = mime.endsWith('ascii') || mime.endsWith('utf-8')
     if (isText) {
-      const { languageId, confidence } = (await detector.runModel(await fileInfo.file!.text()))[0]
-      if (confidence > guessThreshold) {
-        guessLangExtension = languageId === 'prolog' ? 'pro' : languageId
+      const result = await detector.runModel(await fileInfo.file!.text())
+      if (result.length > 0) {
+        const { languageId, confidence } = result[0]
+        if (confidence > guessThreshold) {
+          guessLangExtension = languageId === 'prolog' ? 'pro' : languageId
+        }
       }
     }
     if (guessLangExtension) {
