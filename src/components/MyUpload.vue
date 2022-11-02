@@ -1,23 +1,17 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { NCard, NButton, NUpload, NUploadDragger, NIcon, NText, NP, NSpace } from 'naive-ui'
 import { AttachFileFilled } from '@vicons/material'
-import type { UploadFileInfo } from 'naive-ui'
+import { files } from '../manager'
 
 const router = useRouter()
-const files = ref<UploadFileInfo[]>([])
-
-function handleUpdate (fileList: UploadFileInfo[]) {
-  files.value = fileList
-}
 
 function clearAll () {
-  files.value.splice(0, files.value.length)
+  files.value = []
 }
 
 function check () {
-  Files = files.value
   router.push({ name: 'Result' })
 }
 
@@ -26,7 +20,7 @@ const checkable = computed(() => files.value.length > 0)
 
 <template>
 <n-card class="my-column">
-  <n-upload multiple directory-dnd :default-upload="false" @update:file-list="handleUpdate">
+  <n-upload multiple directory-dnd :default-upload="false" v-model:file-list="files">
     <n-upload-dragger>
       <div style="margin-bottom: 16px">
         <n-icon :size="32">

@@ -28,7 +28,7 @@ function gotoMainView () {
       <n-h1>My File Type</n-h1>
     </div>
     <router-view v-slot="{ Component }">
-      <keep-alive include="MainView">
+      <keep-alive>
         <component :is="Component" />
       </keep-alive>
     </router-view>

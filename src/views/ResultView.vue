@@ -10,6 +10,7 @@ import MyPreviewText from '../components/MyPreviewText.vue'
 import { langMap } from '../lang'
 import { RentedBuffer } from '@libreservice/my-worker'
 import { getType, getMIME, getExtension } from '../workerAPI'
+import { files } from '../manager'
 
 type Row = {
   name: string,
@@ -109,7 +110,7 @@ function createColumns (): DataTableColumns<Row> {
 }
 
 onMounted(async () => {
-  for (const fileInfo of Files) {
+  for (const fileInfo of files.value) {
     const arrayBuffer = await fileInfo.file!.slice(0, headerLength).arrayBuffer()
     const rBuf = new RentedBuffer(arrayBuffer)
     let guessLangExtension: string | undefined
