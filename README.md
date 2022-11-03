@@ -33,7 +33,7 @@ git submodule update
 ```
 ### Build wasm
 ```sh
-pnpm run db
+pnpm run native
 pnpm run lib
 pnpm run wasm
 ```
@@ -48,6 +48,10 @@ pnpm run lint:fix
 ### Build
 ```sh
 pnpm run build
+```
+### Test
+```sh
+pnpm run test
 ```
 ### Preview
 ```sh

@@ -28,9 +28,9 @@ pnpm-lock.yaml
 *.wasm
 *.mgc
 *.so
-*.h
 public/magic.js
 public/magic.data
+test_sanitizer
 
 *.js.map
 public/worker.js

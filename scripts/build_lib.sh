@@ -5,7 +5,6 @@ emconfigure ./configure
 rm a.wasm
 cd src
 emmake make libmagic.la
-cp magic.h ../../wasm
 
 os=`uname`
 if [[ $os == 'Linux' ]]; then

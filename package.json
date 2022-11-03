@@ -11,7 +11,7 @@
   "scripts": {
     "worker": "rollup -c rollup.worker-config.mjs",
     "dev": "vite --host",
-    "db": "bash scripts/build_db.sh",
+    "native": "bash scripts/build_native.sh",
     "lib": "bash scripts/build_lib.sh",
     "wasm": "bash scripts/build_wasm.sh",
     "lint": "eslint --ext .ts,.js,.vue src test",

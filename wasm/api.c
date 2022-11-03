@@ -1,10 +1,8 @@
 #include <stdio.h>
-#include <emscripten.h>
-#include "magic.h"
+#include "api.h"
 
-static magic_t magic_none, magic_mime, magic_extension;
+magic_t magic_none, magic_mime, magic_extension;
 
-EMSCRIPTEN_KEEPALIVE
 void init() {
     static const char *magic_path = "magic.mgc";
     magic_none = magic_open(MAGIC_NONE);
@@ -15,17 +13,14 @@ void init() {
     magic_load(magic_extension, magic_path);
 }
 
-EMSCRIPTEN_KEEPALIVE
 const char *get_type(const char *buf, size_t len) {
     return magic_buffer(magic_none, buf, len);
 }
 
-EMSCRIPTEN_KEEPALIVE
 const char *get_mime(const char *buf, size_t len) {
     return magic_buffer(magic_mime, buf, len);
 }
 
-EMSCRIPTEN_KEEPALIVE
 const char *get_extension(const char *buf, size_t len) {
     return magic_buffer(magic_extension, buf, len);
 }
