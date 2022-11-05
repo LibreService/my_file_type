@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { NCard, NButton, NUpload, NUploadDragger, NIcon, NText, NP, NSpace } from 'naive-ui'
 import { AttachFileFilled } from '@vicons/material'
-import { files } from '../manager'
+import { files, submittedFiles } from '../manager'
 
 const router = useRouter()
 
@@ -12,6 +12,7 @@ function clearAll () {
 }
 
 function check () {
+  submittedFiles.value = files.value
   router.push({ name: 'Result' })
 }
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { h, ref, onMounted } from 'vue'
+import { h, ref, watchEffect } from 'vue'
 import { NDataTable, NIcon, NInput, NModal, useDialog } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
 import { ModelOperations } from '@vscode/vscode-languagedetection'
@@ -10,7 +10,7 @@ import MyPreviewText from '../components/MyPreviewText.vue'
 import { langMap } from '../lang'
 import { RentedBuffer } from '@libreservice/my-worker'
 import { getType, getMIME, getExtension } from '../workerAPI'
-import { files } from '../manager'
+import { submittedFiles } from '../manager'
 
 type Row = {
   name: string,
@@ -109,8 +109,9 @@ function createColumns (): DataTableColumns<Row> {
   ]
 }
 
-onMounted(async () => {
-  for (const fileInfo of files.value) {
+watchEffect(async () => {
+  data.value = []
+  for (const fileInfo of submittedFiles.value) {
     const arrayBuffer = await fileInfo.file!.slice(0, headerLength).arrayBuffer()
     const rBuf = new RentedBuffer(arrayBuffer)
     let guessLangExtension: string | undefined

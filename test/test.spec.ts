@@ -2,8 +2,7 @@ import { test, expect, Page } from '@playwright/test'
 
 const baseURL = 'http://localhost:4173/'
 
-async function prepare (page: Page, files: string[]) {
-  await page.goto(baseURL)
+async function upload (page: Page, files: string[]) {
   const [fileChooser] = await Promise.all([
     page.waitForEvent('filechooser'),
     page.getByText('Click, or drag files/folders to this area').click()
@@ -11,8 +10,18 @@ async function prepare (page: Page, files: string[]) {
   return fileChooser.setFiles(files)
 }
 
+async function prepare (page: Page, files: string[]) {
+  await page.goto(baseURL)
+  return upload(page, files)
+}
+
+async function expectAtResult (page: Page) {
+  return expect(page).toHaveURL(`${baseURL}result`)
+}
+
 async function clickCheck (page: Page) {
-  return page.getByRole('button', { name: 'Check' }).click()
+  await page.getByRole('button', { name: 'Check' }).click()
+  return expectAtResult(page)
 }
 
 test.describe('test', () => {
@@ -31,7 +40,6 @@ test.describe('test', () => {
     await prepare(page, ['dist/magic.wasm', 'dist/magic.js'])
 
     await clickCheck(page)
-    await expect(page).toHaveURL(`${baseURL}result`)
 
     const trWasm = page.locator('tbody > tr:nth-child(1)')
     await expect(trWasm.locator('td:nth-child(1)')).toHaveText('magic.wasm')
@@ -52,8 +60,33 @@ test.describe('test', () => {
     await prepare(page, ['test/resource/pyc.gitignore'])
 
     await clickCheck(page)
-    await expect(page).toHaveURL(`${baseURL}result`)
 
     await expect(page.locator('tbody > tr')).toHaveCount(1)
+  })
+
+  test('Files status on back and forward', async ({ page }) => {
+    await prepare(page, ['dist/magic.wasm'])
+
+    await clickCheck(page)
+
+    const td = page.locator('tbody > tr:nth-child(1) > td:nth-child(1)')
+    await expect(td).toHaveText('magic.wasm')
+
+    await page.goBack()
+    await expect(page).toHaveURL(baseURL)
+
+    await page.locator('.n-upload-file button').click()
+
+    await page.goForward()
+    await expectAtResult(page)
+    await expect(td).toHaveText('magic.wasm')
+
+    await page.goBack()
+    await expect(page).toHaveURL(baseURL)
+
+    await upload(page, ['dist/magic.js'])
+    await clickCheck(page)
+
+    await expect(td).toHaveText('magic.js')
   })
 })
