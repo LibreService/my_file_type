@@ -27,7 +27,9 @@ pnpm-lock.yaml
 # wasm
 *.wasm
 *.mgc
+*.bz2
 *.so
+*.a
 public/magic.js
 public/magic.data
 test_sanitizer

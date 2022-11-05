@@ -1,4 +1,12 @@
 set -e
+
+pushd bzip2
+rm -rf build/* && cd build
+emcmake cmake .. -DENABLE_APP=OFF -DCMAKE_BUILD_TYPE="Release"
+cmake --build .
+mv libbz2.a ../../wasm
+popd
+
 cd file
 [[ -f configure ]] || autoreconf --install
 emconfigure ./configure
