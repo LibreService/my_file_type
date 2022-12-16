@@ -3,3 +3,7 @@
   max-width: 900px;
   margin: auto;
 }
+
+.n-a {
+  display: inline-block;
+}

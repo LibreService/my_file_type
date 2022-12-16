@@ -45,6 +45,10 @@ pnpm run dev
 ```sh
 pnpm run lint:fix
 ```
+### Check type
+```sh
+pnpm run check
+```
 ### Build
 ```sh
 pnpm run build

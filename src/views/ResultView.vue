@@ -150,8 +150,19 @@ watchEffect(async () => {
 </script>
 
 <template>
-<n-data-table :columns="createColumns()" :data="data" class="my-column"/>
-<n-modal v-model:show="showPreviewText" style="max-width: calc(100vw - 32px)">
-  <my-preview-text v-if="showPreviewText" :code="previewCode" :predictedExtension="predictedExtension" />
-</n-modal>
+  <n-data-table
+    :columns="createColumns()"
+    :data="data"
+    class="my-column"
+  />
+  <n-modal
+    v-model:show="showPreviewText"
+    style="max-width: calc(100vw - 32px)"
+  >
+    <my-preview-text
+      v-if="showPreviewText"
+      :code="previewCode"
+      :predicted-extension="predictedExtension"
+    />
+  </n-modal>
 </template>

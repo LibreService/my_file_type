@@ -130,16 +130,26 @@ function fallback () {
 </script>
 
 <template>
-<n-config-provider :hljs="hljs">
-  <n-card>
-    <div style="display: flex; align-items: center; justify-content: flex-end">
-      Language:
-      <n-select v-model:value="extension" :options="options" :fallback-option="fallback" style="width: 160px; margin-left: 8px"/>
-    </div>
-    <n-scrollbar x-scrollable>
-      <!-- font-family needed as on Ubuntu Firefox Courier is selected and TeX Gyre Cursor is used, but "fi" is wrongly rendered -->
-      <n-code :code="code" :language="langMap[extension]?.hljs || 'plaintext'" show-line-numbers style="margin-top: 8px; font-family: monospace"/>
-    </n-scrollbar>
-  </n-card>
-</n-config-provider>
+  <n-config-provider :hljs="hljs">
+    <n-card>
+      <div style="display: flex; align-items: center; justify-content: flex-end">
+        Language:
+        <n-select
+          v-model:value="extension"
+          :options="options"
+          :fallback-option="fallback"
+          style="width: 160px; margin-left: 8px"
+        />
+      </div>
+      <n-scrollbar x-scrollable>
+        <!-- font-family needed as on Ubuntu Firefox Courier is selected and TeX Gyre Cursor is used, but "fi" is wrongly rendered -->
+        <n-code
+          :code="code"
+          :language="langMap[extension]?.hljs || 'plaintext'"
+          show-line-numbers
+          style="margin-top: 8px; font-family: monospace"
+        />
+      </n-scrollbar>
+    </n-card>
+  </n-config-provider>
 </template>

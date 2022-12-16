@@ -17,6 +17,10 @@ const features = [
 </script>
 
 <template>
-<my-upload />
-<my-feature-panel :features="features" class="my-column" style="margin-top: 16px" />
+  <my-upload />
+  <my-feature-panel
+    :features="features"
+    class="my-column"
+    style="margin-top: 16px"
+  />
 </template>
