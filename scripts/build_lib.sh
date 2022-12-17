@@ -1,25 +1,19 @@
 set -e
 
-pushd bzip2
-rm -rf build/* && cd build
-emcmake cmake .. -DENABLE_APP=OFF -DCMAKE_BUILD_TYPE="Release"
-cmake --build .
-mv libbz2.a ../../wasm
-popd
+root=$PWD
 
-cd file
-[[ -f configure ]] || autoreconf --install
-emconfigure ./configure
-rm a.wasm
+emcmake cmake bzip2 -B build/bzip2_wasm \
+  -DENABLE_APP=OFF \
+  -DCMAKE_BUILD_TYPE="Release"
+cmake --build build/bzip2_wasm
+cp build/bzip2_wasm/libbz2.a wasm
+
+mkdir -p build/file_wasm && pushd build/file_wasm
+[[ -f $root/file/configure ]] || autoreconf --install $root/file
+emconfigure $root/file/configure \
+  --enable-static \
+  --disable-shared
 cd src
+cp $root/build/file_native/src/magic.h .
 emmake make libmagic.la
-
-os=`uname`
-if [[ $os == 'Linux' ]]; then
-  mv .libs/libmagic.so.1.0.0 ../../wasm/libmagic.so
-elif [[ $os == 'Darwin' ]]; then
-  mv .libs/libmagic.1.dylib ../../wasm/libmagic.dylib
-else
-  echo 'Unsupported OS'
-  exit 1
-fi
+cp .libs/libmagic.a $root/wasm/libmagic.so

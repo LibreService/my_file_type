@@ -33,6 +33,7 @@ pnpm-lock.yaml
 public/magic.js
 public/magic.data
 test_sanitizer
+build
 
 *.js.map
 public/worker.js

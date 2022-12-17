@@ -1,4 +1,4 @@
-#include "../file/src/magic.h"
+#include "../build/file_native/src/magic.h"
 #include "../bzip2/bzlib.h"
 
 #define OBUF_LEN 5000
