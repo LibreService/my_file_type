@@ -1,6 +1,5 @@
 # My File Type
 ![](https://img.shields.io/github/license/LibreService/my_file_type)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/LibreService/my_file_type.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/LibreService/my_file_type/context:javascript)
 
 Find type of your file in a fast and secure way.
 
