@@ -9,4 +9,4 @@ emcc \
   --preload-file magic.mgc.bz2 \
   -o ../public/magic.js \
   api.c \
-  -L . -l bz2 -l magic
+  -L . -l bz2_static -l magic

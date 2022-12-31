@@ -11,6 +11,7 @@ int main() {
     size_t len = ftell(fp);
     rewind(fp);
     char *buf = malloc(len);
+    fread(buf, len, 1, fp);
 
     init();
     puts(get_type(buf, len));
