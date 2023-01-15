@@ -1,11 +1,9 @@
-import { expose } from '@libreservice/my-worker'
+import { loadWasm, expose } from '@libreservice/my-worker'
 
-importScripts('/magic.js')
-
-const readyPromise = new Promise(resolve => {
-  Module.onRuntimeInitialized = () => {
+const readyPromise = loadWasm('magic.js', {
+  url: '__LIBRESERVICE_CDN__',
+  init () {
     Module.ccall('init', 'null', [], [])
-    resolve(null)
   }
 })
 

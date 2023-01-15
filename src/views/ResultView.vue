@@ -34,7 +34,7 @@ const previewCode = ref('')
 const predictedExtension = ref('')
 const detector = new ModelOperations({
   modelJsonLoaderFunc: () => Promise.resolve(model),
-  weightsLoaderFunc: async () => await (await fetch('/group1-shard1of1.bin')).arrayBuffer()
+  weightsLoaderFunc: async () => await (await fetch('__LIBRESERVICE_CDN__' + 'group1-shard1of1.bin')).arrayBuffer()
 })
 
 function createColumns (): DataTableColumns<Row> {
